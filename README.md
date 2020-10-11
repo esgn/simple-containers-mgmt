@@ -1,6 +1,6 @@
 # Deployment
 
-A simple setup to manage docker instances for web applications. It includes [nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager) and [portainer](https://github.com/portainer/portainer). 
+A simple setup to manage docker containers in web application context. It includes [nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager) and [portainer](https://github.com/portainer/portainer). 
 
 ## Principles
 
@@ -21,6 +21,11 @@ A simple setup to manage docker instances for web applications. It includes [ngi
 * Create a proxy host for portainer (`Forward Hostname : portainer / Forward Port : 9000`) and generate a [Let's Encrypt](https://letsencrypt.org/) certificate for it.
 * You're good to go ! :rocket:
 
-## TODO
+## Documentation
+
+* [Portainer documentation](https://documentation.portainer.io/)
+* [Nginx-proxy-manager documentation](https://nginxproxymanager.com/guide/)
+
+## Todo List
 
 - [ ] Add container supervision solution

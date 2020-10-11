@@ -1,0 +1,59 @@
+version: "3.5"
+
+services:
+
+  nxpm:
+    image: jc21/nginx-proxy-manager:${NXPM_VERSION}
+    container_name: nxpm
+    ports:
+      - 80:80
+      - 127.0.0.1:81:81 # admin interface accessible locally or via a SSH tunnel
+      - 443:443
+    networks:
+      - nxpm
+    volumes:
+      - nxpm_data:/data
+      - nxpm_lets_encrypt:/etc/letsencrypt
+      - ./production.json:/app/config/production.json
+    restart: on-failure
+
+  db:
+    image: mariadb:${MARIADB_VERSION}
+    container_name: nxpm-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWD}"
+      MYSQL_DATABASE: "nxpm"
+      MYSQL_USER: "nxpm"
+      MYSQL_PASSWORD: "${MARIADB_PASSWD}"
+    networks:
+      - nxpm
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: on-failure
+
+  portainer:
+    image: portainer/portainer-ce:${PORTAINER_VERSION}
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - portainer_data:/data
+    networks:
+      - nxpm
+    restart: unless-stopped
+  
+volumes:
+  nxpm_data:
+    name: nxpm_data
+  nxpm_lets_encrypt:
+    name: nxpm_lets_encrypt
+  mariadb_data:
+    name: mariadb_data
+  portainer_data:
+    name: portainer_data
+    
+networks:
+  nxpm:
+    name: nxpm

@@ -4,7 +4,7 @@ A simple setup to manage docker containers in web application context. It includ
 
 ## Principles
 
-* All the containers must use the `nxpm` network and don't need to expose ports on local host
+* All the containers must use the `nxpm` network and don't need to publish ports on local host
 * nginx-proxy-manager will be the only service with open ports (80 and 443) on local host
 
 ## Run the stack

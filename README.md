@@ -1,4 +1,4 @@
-# Simmple Containers Management
+# Simple Containers Management
 
 A simple setup I use to manage docker containers in web application context. It includes [nginx-proxy-manager](https://github.com/jc21/nginx-proxy-manager) and [portainer](https://github.com/portainer/portainer). 
 
